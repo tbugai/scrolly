@@ -169,5 +169,55 @@ describe("scrolly plugin", function() {
 			});
 		});
 	});
-
+	
+	describe("setting options", function() {
+		var $options;
+		beforeEach(function() {
+			$options = { };
+		});
+	  	describe("set the left button text", function() {
+	  	  beforeEach(function() {
+	  	    $options.leftText = "";
+			new scrolly("#left-side-text", $options);
+	  	  });
+	
+			it("should not have text in the left button", function() {
+				expect($("#left-side-text").find(".left-side .clickable").html()).toBe("");
+			});
+	  	});
+	
+	  	describe("set the right button text", function() {
+	  	  beforeEach(function() {
+	  	    $options.rightText = "";
+			new scrolly("#right-side-text", $options);
+	  	  });
+	
+			it("should not have text in the left button", function() {
+				expect($("#right-side-text").find(".right-side .clickable").html()).toBe("");
+			});
+	  	});
+	
+		describe("disable building the container", function() {
+		  	beforeEach(function() {
+		    	$options.buildContainer = false;
+				$sut = new scrolly("#options", $options);
+			});
+		
+			it("should not have a portal", function() {
+			  	expect($("#options").find(".portal").length).toBe(0);
+			});
+			
+			it("should not have a content section", function() {
+			  	expect($("#options").find(".portal .content").length).toBe(0);
+			});			
+			
+			it("should not have a right side", function() {
+			 	expect($("#options").find(".right-side").length).toBe(0);
+			});
+			
+			it("should not have a left side", function() {
+			 	expect($("#options").find(".left-side").length).toBe(0);
+			});
+		});
+	});
 });
