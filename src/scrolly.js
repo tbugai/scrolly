@@ -58,8 +58,12 @@ var scrolly;
 					that.rightButton.hide();
 				} else {
 					changeValue = $portalWidth
+					if(remainingTravel == $portalWidth) {
+						that.rightButton.hide();
+					}
 				}
 				that.content.animate({left: "-=" + changeValue}, 200);
+
 			}
 		};
 

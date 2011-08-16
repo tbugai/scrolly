@@ -70,14 +70,39 @@ describe("scrolly plugin", function() {
 		context("less than three pages of width", function() {
 			beforeEach(function() {
 				$target.content.width(230);
-				$target.content.css("left", "-100px");
+				spyOn($.fn,"hide");
+			});
+			
+			context("starting at -100", function() {
+				beforeEach(function() {
+					$target.content.css("left", "-100px");
+					$target.scrollRight.call($button);
+				});
+				
+				it("should have a left value of -130", function() {
+					expect($target.content.position().left).toBe(-130);
+				});
+				
+				it("should have called hide", function() {
+					expect($.fn.hide).toHaveBeenCalled();
+				});
+			});
+			
+			context("starting at -30", function() {
+				beforeEach(function() {
+					$target.content.css("left", "-30px");
+					$target.scrollRight.call($button);
+				});
+				
+				it("should have a left value of -130", function() {
+					expect($target.content.position().left).toBe(-130);
+				});
+				
+				it("should have called hide", function() {
+					expect($.fn.hide).toHaveBeenCalled();
+				});
 			});
 
-			it("should have a left value of -100", function() {
-				expect($target.content.position().left).toBe(-100);
-				$target.scrollRight.call($button);
-				expect($target.content.position().left).toBe(-130);
-			});
 		});
 
 		context("two pages of width", function() {
